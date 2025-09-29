@@ -12,20 +12,19 @@ struct GameBoardView: View {
     
     var body: some View {
         makeBoard()
+            .cornerRadius(20)
     }
 }
 
 private extension GameBoardView {
     @ViewBuilder
     func makeBoard() -> some View {
-        let maxBoardWidth = min(UIScreen.main.bounds.width, UIScreen.main.bounds.height) - 20
+        let maxBoardWidth = min(UIScreen.main.bounds.width, UIScreen.main.bounds.height) - Spacing.md.rawValue
         let cellSize = maxBoardWidth / CGFloat(viewModel.boardSize)
         let boardSize = cellSize * CGFloat(viewModel.boardSize)
         let columns = Array(repeating: GridItem(.fixed(cellSize), spacing: 0), count: viewModel.boardSize)
         
         ZStack {
-            conflictHighlight(cellSize: cellSize)
-            
             LazyVGrid(columns: columns, spacing: 0) {
                 ForEach(0..<(viewModel.boardSize * viewModel.boardSize), id: \.self) { index in
                     let row = index / viewModel.boardSize
@@ -34,6 +33,8 @@ private extension GameBoardView {
                 }
             }
             .frame(width: boardSize, height: boardSize)
+            
+            conflictHighlight(cellSize: cellSize)
         }
     }
     
@@ -54,21 +55,24 @@ private extension GameBoardView {
                     path.move(to: startPoint)
                     path.addLine(to: endPoint)
                 }
-                .stroke(.red.opacity(0.2),
-                        style: StrokeStyle(
-                            lineWidth: cellSize * 0.7,
-                            lineCap: .round)
+                .stroke(
+                    .red.opacity(0.2),
+                    style: StrokeStyle(
+                        lineWidth: cellSize * 0.7,
+                        lineCap: .round
+                    )
                 )
             }
         }
         .frame(width: boardSize, height: boardSize)
+        .allowsHitTesting(false)
     }
     
     @ViewBuilder
     func boardCell(coord: Coord, cellSize: CGFloat) -> some View {
         ZStack {
             Rectangle()
-                .fill((coord.row + coord.col).isMultiple(of: 2) ? Color.secondary.opacity(0.25) : Color.secondary.opacity(0.6))
+                .fill((coord.row + coord.col).isMultiple(of: 2) ? Color.darkTile : Color.lightTile)
                 .aspectRatio(1, contentMode: .fit)
             if viewModel.placedQueens.contains(coord) {
                 Image(systemName: "crown.fill")

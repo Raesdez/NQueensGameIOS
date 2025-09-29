@@ -21,6 +21,7 @@ class GameViewModel {
     
     private(set) var errorState: GameError?
     private(set) var showShowGameSettingsView = true
+    private(set) var isSettingsCloseButtonEnabled = false
     
     var remainingQueens: Int {
         boardSize - placedQueens.count
@@ -29,6 +30,7 @@ class GameViewModel {
     // MARK: - Functions
     
     func start(boardSize: Int) {
+        isSettingsCloseButtonEnabled = true
         self.boardSize = boardSize
         
         if boardSize < 4 {

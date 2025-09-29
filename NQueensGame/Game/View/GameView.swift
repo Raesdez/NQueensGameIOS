@@ -16,85 +16,110 @@ struct GameView: View {
     
     var body: some View {
         ZStack {
-            if viewModel.errorState == nil {
-                VStack {
-                    makeTopButtonsView()
-                    GameBoardView()
-                        .environment(viewModel)
-                    makeRemainingQueensView()
-                    Spacer()
-                }
-                .overlay {
-                    if viewModel.gameWon {
-                        Text("Yay you won")
-                    }
-                }
-            } else {
-                Text("Invalid board size")
-                    .foregroundStyle(.secondary)
-            }
+            Gradient.backgroundGradient
+            makeContentView()
             makeGameSettingsOverlayView()
         }
-        .animation(.easeInOut, value: viewModel.showShowGameSettingsView)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    viewModel.restart()
+                } label: {
+                    Image(systemName: "arrow.counterclockwise")
+                        .resizable()
+                }
+            }
+        }
     }
 }
 
 private extension GameView {
+    struct Constants {
+        static var animationDuration: Double { 0.25 }
+        static var overlayBackgroundOpacity: Double { 0.95 }
+    }
+    
+    @ViewBuilder
+    func makeContentView() -> some View {
+        if viewModel.errorState == nil {
+            VStack(spacing: Spacing.md.rawValue) {
+                Text("Playing on a \(viewModel.boardSize)x\(viewModel.boardSize) board")
+                    .textFont(.title)
+                    .foregroundColor(Color.textOnBackground)
+                GameBoardView()
+                    .environment(viewModel)
+                makeRemainingQueensView()
+                Spacer()
+            }
+            .overlay {
+                if viewModel.gameWon {
+                    Text("Yay you won")
+                        .foregroundColor(.white)
+                }
+            }
+            .padding(.top, .md)
+        } else {
+            Text("Invalid board size")
+                .foregroundStyle(.secondary)
+        }
+    }
+    
     @ViewBuilder
     func makeGameSettingsOverlayView() -> some View {
         if viewModel.showShowGameSettingsView {
-            Color.gray
-                .opacity(0.9)
-                .ignoresSafeArea()
-                .blur(radius: 3)
-            BoardSizePickerView(
-                selectedNumber: viewModel.boardSize,
-                startGameButtonTappedAction: { size in
-                    viewModel.start(boardSize: size)
-                }, closeButtonTappedAction: {
-                    viewModel.closeGameSettingsModal()
-                })
-            .background(.white)
-            .cornerRadius(20)
-            .shadow(radius: 11)
-            .padding(.horizontal, 25)
-        }
-    }
-    
-    func makeTopButtonsView() -> some View {
-        HStack {
-            Button {
-               print("Go back")
-            } label: {
-                Image(systemName: "arrow.backward.circle.fill")
-                    .resizable()
-                    .frame(width: 40, height: 40)
+            ZStack {
+                Color.gray
+                    .opacity(Constants.overlayBackgroundOpacity)
+                    .ignoresSafeArea()
+                    .transition(.opacity)
+                
+                BoardSizePickerView(
+                    selectedNumber: viewModel.boardSize,
+                    isCloseButtonAvailable: viewModel.isSettingsCloseButtonEnabled,
+                    startGameButtonTappedAction: { size in
+                        withAnimation(.easeInOut(duration: Constants.animationDuration)) {
+                            viewModel.start(boardSize: size)
+                        }
+                    },
+                    closeButtonTappedAction: {
+                        withAnimation(.easeInOut(duration: Constants.animationDuration)) {
+                            viewModel.closeGameSettingsModal()
+                        }
+                    }
+                )
+                .padding(.horizontal, .lg)
+                .transition(.move(edge: .bottom).combined(with: .opacity))
             }
-            Spacer()
-            Button {
-                viewModel.restart()
-            } label: {
-                Image(systemName: "arrow.counterclockwise.circle.fill")
-                    .resizable()
-                    .frame(width: 40, height: 40)
-            }
+            .zIndex(1)
+            .animation(.easeInOut(duration: Constants.animationDuration), value: viewModel.showShowGameSettingsView)
         }
-        .padding(.horizontal, 20)
-        .padding(.top, 20)
-        .padding(.bottom, 40)
     }
     
     func makeRemainingQueensView() -> some View {
-        Text("Remaining Queens: \(viewModel.remainingQueens)")
-            .padding(12)
-            .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(Color.blue)
-            )
-            .foregroundColor(.white)
+        HStack {
+            Text("Challenge. Place all required queens in the board so no piece threatens another")
+                .textFont(.subtitle, .medium)
+                .foregroundColor(Color.textStandard)
+                .padding()
+            VStack {
+                Text("Pieces left")
+                    .textFont(.regular)
+                    .foregroundColor(Color.textStandard)
+                Text("\(viewModel.remainingQueens)")
+                    .textFont(.heading, .bold)
+            }
+            .padding()
+        }
+        .background(
+            RoundedRectangle(cornerRadius: 20)
+                .fill(Color.white)
+        )
+        .padding(.all,.sm)
     }
 }
 
 #Preview {
-    GameView()
+    NavigationStack {
+        GameView()
+    }
 }
