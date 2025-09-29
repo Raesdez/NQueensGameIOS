@@ -18,9 +18,11 @@ class GameViewModel {
     private(set) var conflicts = Set<CoordPair>()
     /// If `true` then the game has finished since the user has won.
     private(set) var gameWon: Bool = false
-    
+    /// If the game status is currently in error.
     private(set) var errorState: GameError?
-    private(set) var showShowGameSettingsView = true
+    /// Display settings overlay to configure a new game
+    private(set) var showGameSettingsView = true
+    /// If it is the first game after init the close button is not available
     private(set) var isSettingsCloseButtonEnabled = false
     
     var remainingQueens: Int {
@@ -37,22 +39,23 @@ class GameViewModel {
             errorState = .minBoardSize
         }
         
-        showShowGameSettingsView = false
+        showGameSettingsView = false
         placedQueens = Set<Coord>()
         conflicts = Set<CoordPair>()
         gameWon = false
     }
     
     func restart() {
-        showShowGameSettingsView = true
+        showGameSettingsView = true
     }
     
     func closeGameSettingsModal() {
-        showShowGameSettingsView = false
+        showGameSettingsView = false
     }
     
     func tapCell(at coord: Coord) {
-        guard errorState == nil else {
+        guard errorState == nil,
+              !gameWon else {
             return
         }
         

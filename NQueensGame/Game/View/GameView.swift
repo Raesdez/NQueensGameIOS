@@ -66,7 +66,7 @@ private extension GameView {
     
     @ViewBuilder
     func makeGameSettingsOverlayView() -> some View {
-        if viewModel.showShowGameSettingsView {
+        if viewModel.showGameSettingsView {
             ZStack {
                 Color.gray
                     .opacity(Constants.overlayBackgroundOpacity)
@@ -91,7 +91,7 @@ private extension GameView {
                 .transition(.move(edge: .bottom).combined(with: .opacity))
             }
             .zIndex(1)
-            .animation(.easeInOut(duration: Constants.animationDuration), value: viewModel.showShowGameSettingsView)
+            .animation(.easeInOut(duration: Constants.animationDuration), value: viewModel.showGameSettingsView)
         }
     }
     
