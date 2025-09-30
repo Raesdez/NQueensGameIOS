@@ -7,8 +7,8 @@
 
 /// Stores a pair of coordinates.
 ///
-/// - Note: the init orders the coordinates to make a pair and its simetrical the same, so that [(1,2), (3,4)] is the same as [(3,4), (1,2)]
-struct CoordPair: Hashable {
+/// - Note: The init orders the coordinates to make a pair and its simetrical the same, so that [(1,2), (3,4)] is the same as [(3,4), (1,2)]
+struct CoordPair: nonisolated Hashable {
     let a: Coord
     let b: Coord
 

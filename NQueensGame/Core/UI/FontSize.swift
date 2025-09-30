@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// All font sizes used in the app
 enum FontSize: CGFloat {
     case heading = 50
     case title = 25

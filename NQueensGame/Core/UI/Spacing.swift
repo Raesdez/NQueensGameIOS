@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Standard spacing to use in the app
 enum Spacing: CGFloat {
     case sm = 8
     case md = 18

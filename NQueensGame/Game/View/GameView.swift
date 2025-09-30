@@ -28,8 +28,21 @@ struct GameView: View {
                     Image(systemName: "arrow.counterclockwise")
                         .resizable()
                 }
+                .accessibilityIdentifier(Identifiers.restartButton)
             }
+        
         }
+    }
+}
+
+extension GameView {
+    enum Identifiers: AccessibilityIdentifying {
+        case restartButton
+        case board
+        case title
+        case challengeGoalText
+        case remainingPiecesTitle
+        case remainingPiecesNumber
     }
 }
 
@@ -46,8 +59,10 @@ private extension GameView {
                 Text("Playing on a \(viewModel.boardSize)x\(viewModel.boardSize) board")
                     .textFont(.title)
                     .foregroundColor(Color.textOnBackground)
+                    .accessibilityIdentifier(Identifiers.title)
                 GameBoardView()
                     .environment(viewModel)
+                    .accessibilityIdentifier(Identifiers.board)
                 makeRemainingQueensView()
                 Spacer()
             }
@@ -74,6 +89,7 @@ private extension GameView {
                     .transition(.opacity)
                 
                 BoardSizePickerView(
+                    allowedBoardRange: viewModel.allowedBoardSizeRange,
                     selectedNumber: viewModel.boardSize,
                     isCloseButtonAvailable: viewModel.isSettingsCloseButtonEnabled,
                     startGameButtonTappedAction: { size in
@@ -101,12 +117,15 @@ private extension GameView {
                 .textFont(.subtitle, .medium)
                 .foregroundColor(Color.textStandard)
                 .padding()
+                .accessibilityIdentifier(Identifiers.challengeGoalText)
             VStack {
                 Text("Pieces left")
                     .textFont(.regular)
                     .foregroundColor(Color.textStandard)
-                Text("\(viewModel.remainingQueens)")
+                    .accessibilityIdentifier(Identifiers.remainingPiecesTitle)
+                Text("\(viewModel.remainingPieces)")
                     .textFont(.heading, .bold)
+                    .accessibilityIdentifier(Identifiers.remainingPiecesNumber)
             }
             .padding()
         }

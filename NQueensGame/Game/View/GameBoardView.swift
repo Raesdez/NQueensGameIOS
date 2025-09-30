@@ -16,10 +16,21 @@ struct GameBoardView: View {
     }
 }
 
+extension GameBoardView {
+    enum Identifiers: AccessibilityIdentifying {
+        case piece
+        case boardCell
+    }
+}
+
 private extension GameBoardView {
+    struct Constants {
+        static var pieceScaleFactor: Double { 0.45 }
+    }
+    
     @ViewBuilder
     func makeBoard() -> some View {
-        let maxBoardWidth = min(UIScreen.main.bounds.width, UIScreen.main.bounds.height) - Spacing.md.rawValue
+        let maxBoardWidth = min(screenBounds.width, screenBounds.height) - Spacing.md.rawValue
         let cellSize = maxBoardWidth / CGFloat(viewModel.boardSize)
         let boardSize = cellSize * CGFloat(viewModel.boardSize)
         let columns = Array(repeating: GridItem(.fixed(cellSize), spacing: 0), count: viewModel.boardSize)
@@ -30,6 +41,7 @@ private extension GameBoardView {
                     let row = index / viewModel.boardSize
                     let col = index % viewModel.boardSize
                     boardCell(coord: Coord(row: row, col: col), cellSize: cellSize)
+                        .accessibilityIdentifier(Identifiers.boardCell)
                 }
             }
             .frame(width: boardSize, height: boardSize)
@@ -44,15 +56,9 @@ private extension GameBoardView {
         return ZStack {
             ForEach(Array(viewModel.conflicts), id: \.self) { conflict in
                 Path { path in
-                    let startPoint = CGPoint(
-                        x: CGFloat(conflict.a.col) * cellSize + cellSize / 2,
-                        y: CGFloat(conflict.a.row) * cellSize + cellSize / 2
-                    )
-                    let endPoint = CGPoint(
-                        x: CGFloat(conflict.b.col) * cellSize + cellSize / 2,
-                        y: CGFloat(conflict.b.row) * cellSize + cellSize / 2
-                    )
+                    let startPoint = getPoint(for: conflict.a, cellSize)
                     path.move(to: startPoint)
+                    let endPoint = getPoint(for: conflict.b, cellSize)
                     path.addLine(to: endPoint)
                 }
                 .stroke(
@@ -68,13 +74,20 @@ private extension GameBoardView {
         .allowsHitTesting(false)
     }
     
+    func getPoint(for coord: Coord, _ cellSize: CGFloat) -> CGPoint {
+        CGPoint(
+            x: CGFloat(coord.col) * cellSize + cellSize / 2,
+            y: CGFloat(coord.row) * cellSize + cellSize / 2
+        )
+    }
+    
     @ViewBuilder
     func boardCell(coord: Coord, cellSize: CGFloat) -> some View {
         ZStack {
             Rectangle()
                 .fill((coord.row + coord.col).isMultiple(of: 2) ? Color.darkTile : Color.lightTile)
                 .aspectRatio(1, contentMode: .fit)
-            if viewModel.placedQueens.contains(coord) {
+            if viewModel.placedPieces.contains(coord) {
                 Image(systemName: "crown.fill")
                     .resizable()
                     .foregroundColor(
@@ -82,7 +95,8 @@ private extension GameBoardView {
                             $0.a == coord || $0.b == coord
                         }) ? .red : .black
                     )
-                    .frame(width: cellSize * 0.45, height: cellSize * 0.45)
+                    .frame(width: cellSize * Constants.pieceScaleFactor, height: cellSize * Constants.pieceScaleFactor)
+                    .accessibilityIdentifier(Identifiers.piece)
             }
         }
         .onTapGesture {

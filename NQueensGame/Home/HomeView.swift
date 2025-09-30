@@ -18,6 +18,14 @@ struct HomeView: View {
     }
 }
 
+extension HomeView {
+    enum Identifiers: AccessibilityIdentifying {
+        case startButton
+        case image
+        case title
+    }
+}
+
 private extension HomeView {
     @ViewBuilder
     func makeContentView() -> some View {
@@ -27,10 +35,12 @@ private extension HomeView {
                 .multilineTextAlignment(.center)
                 .textFont(.heading)
                 .padding(.top, .xxl)
+                .accessibilityIdentifier(Identifiers.title)
             makeGoToGameButtonView()
                 .padding(.vertical, .xl)
             Spacer()
             makeBackgroundImageView()
+                .accessibilityIdentifier(Identifiers.image)
         }
     }
     
@@ -46,6 +56,7 @@ private extension HomeView {
                 .background(Color.brown)
                 .cornerRadius(30)
         })
+        .accessibilityIdentifier(Identifiers.startButton)
     }
 
     func makeBackgroundImageView() -> some View {
@@ -56,6 +67,7 @@ private extension HomeView {
                 .aspectRatio(contentMode: .fit)
                 .frame(height: 350)
         }
+        .accessibilityIdentifier(Identifiers.image)
     }
 }
 

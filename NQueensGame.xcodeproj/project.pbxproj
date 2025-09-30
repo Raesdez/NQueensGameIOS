@@ -14,19 +14,11 @@
 			remoteGlobalIDString = F66EB59C2E88585500C71BF9;
 			remoteInfo = NQueensGame;
 		};
-		F66EB5B52E88585700C71BF9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F66EB5952E88585500C71BF9 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F66EB59C2E88585500C71BF9;
-			remoteInfo = NQueensGame;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		F66EB59D2E88585500C71BF9 /* NQueensGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NQueensGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F66EB5AA2E88585700C71BF9 /* NQueensGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NQueensGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F66EB5B42E88585700C71BF9 /* NQueensGameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NQueensGameUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -62,13 +54,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F66EB5B12E88585700C71BF9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -87,7 +72,6 @@
 			children = (
 				F66EB59D2E88585500C71BF9 /* NQueensGame.app */,
 				F66EB5AA2E88585700C71BF9 /* NQueensGameTests.xctest */,
-				F66EB5B42E88585700C71BF9 /* NQueensGameUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -140,29 +124,6 @@
 			productReference = F66EB5AA2E88585700C71BF9 /* NQueensGameTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		F66EB5B32E88585700C71BF9 /* NQueensGameUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F66EB5C42E88585700C71BF9 /* Build configuration list for PBXNativeTarget "NQueensGameUITests" */;
-			buildPhases = (
-				F66EB5B02E88585700C71BF9 /* Sources */,
-				F66EB5B12E88585700C71BF9 /* Frameworks */,
-				F66EB5B22E88585700C71BF9 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				F66EB5B62E88585700C71BF9 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				F66EB5B72E88585700C71BF9 /* NQueensGameUITests */,
-			);
-			name = NQueensGameUITests;
-			packageProductDependencies = (
-			);
-			productName = NQueensGameUITests;
-			productReference = F66EB5B42E88585700C71BF9 /* NQueensGameUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -177,10 +138,6 @@
 						CreatedOnToolsVersion = 26.0.1;
 					};
 					F66EB5A92E88585700C71BF9 = {
-						CreatedOnToolsVersion = 26.0.1;
-						TestTargetID = F66EB59C2E88585500C71BF9;
-					};
-					F66EB5B32E88585700C71BF9 = {
 						CreatedOnToolsVersion = 26.0.1;
 						TestTargetID = F66EB59C2E88585500C71BF9;
 					};
@@ -202,7 +159,6 @@
 			targets = (
 				F66EB59C2E88585500C71BF9 /* NQueensGame */,
 				F66EB5A92E88585700C71BF9 /* NQueensGameTests */,
-				F66EB5B32E88585700C71BF9 /* NQueensGameUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -216,13 +172,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		F66EB5A82E88585700C71BF9 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F66EB5B22E88585700C71BF9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -246,13 +195,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F66EB5B02E88585700C71BF9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -260,11 +202,6 @@
 			isa = PBXTargetDependency;
 			target = F66EB59C2E88585500C71BF9 /* NQueensGame */;
 			targetProxy = F66EB5AB2E88585700C71BF9 /* PBXContainerItemProxy */;
-		};
-		F66EB5B62E88585700C71BF9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F66EB59C2E88585500C71BF9 /* NQueensGame */;
-			targetProxy = F66EB5B52E88585700C71BF9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -416,6 +353,7 @@
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -448,6 +386,7 @@
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -498,46 +437,6 @@
 			};
 			name = Release;
 		};
-		F66EB5C52E88585700C71BF9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = WQM76259F7;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.raesdez.NQueensGameUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = NQueensGame;
-			};
-			name = Debug;
-		};
-		F66EB5C62E88585700C71BF9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = WQM76259F7;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.raesdez.NQueensGameUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = NQueensGame;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -564,15 +463,6 @@
 			buildConfigurations = (
 				F66EB5C22E88585700C71BF9 /* Debug */,
 				F66EB5C32E88585700C71BF9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F66EB5C42E88585700C71BF9 /* Build configuration list for PBXNativeTarget "NQueensGameUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F66EB5C52E88585700C71BF9 /* Debug */,
-				F66EB5C62E88585700C71BF9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

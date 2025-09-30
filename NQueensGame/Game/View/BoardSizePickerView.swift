@@ -7,19 +7,24 @@
 
 import SwiftUI
 
+/// View that configures the board size and calls to start a new game
 struct BoardSizePickerView: View {
     @State private var selectedNumber: Int
-    private let range: ClosedRange<Int> = 4...20
+    private let range: ClosedRange<Int>
     private let isCloseButtonAvailable: Bool
+    /// Closure to call when the main action button is pressed. Includes the final board size selected.
     var startGameButtonTappedAction: ((Int) -> Void)?
+    /// Actor to perform when the close button is tapped (if available)
     var closeButtonTappedAction: (() -> Void)?
 
     init(
+        allowedBoardRange: ClosedRange<Int>,
         selectedNumber: Int,
         isCloseButtonAvailable: Bool,
         startGameButtonTappedAction: ((Int) -> Void)? = nil,
         closeButtonTappedAction: (() -> Void)? = nil
     ) {
+        range = allowedBoardRange
         self.selectedNumber = selectedNumber
         self.isCloseButtonAvailable = isCloseButtonAvailable
         self.startGameButtonTappedAction =  startGameButtonTappedAction
@@ -36,8 +41,10 @@ struct BoardSizePickerView: View {
                 Text("Select the size of the board you wanna play")
                     .textFont(.title)
                     .multilineTextAlignment(.center)
+                    .accessibilityIdentifier(Identifiers.title)
                 Text("Bigger boards are more difficult")
                     .textFont(.subtitle, .medium)
+                    .accessibilityIdentifier(Identifiers.subtitle)
             }
             .padding(.top, isCloseButtonAvailable ? .sm : .md)
             .padding(.horizontal, .md)
@@ -51,6 +58,18 @@ struct BoardSizePickerView: View {
         .background(.white)
         .cornerRadius(20)
         .shadow(radius: 11)
+    }
+}
+
+extension BoardSizePickerView {
+    enum Identifiers: AccessibilityIdentifying {
+        case title
+        case subtitle
+        case plusButton
+        case minusButton
+        case currentSelectedNumber
+        case startGameButton
+        case closeButton
     }
 }
 
@@ -68,10 +87,12 @@ private extension BoardSizePickerView {
                     .tint(.green)
             }
             .disabled(selectedNumber == range.lowerBound)
+            .accessibilityIdentifier(Identifiers.minusButton)
             
             Text("\(selectedNumber)")
                 .textFont(.heading)
                 .padding(.horizontal, .lg)
+                .accessibilityIdentifier(Identifiers.currentSelectedNumber)
             
             Button {
                 if selectedNumber < range.upperBound {
@@ -84,6 +105,7 @@ private extension BoardSizePickerView {
                     .tint(.green)
             }
             .disabled(selectedNumber == range.upperBound)
+            .accessibilityIdentifier(Identifiers.plusButton)
         }
     }
     
@@ -98,7 +120,7 @@ private extension BoardSizePickerView {
                 .background(Color.green)
                 .cornerRadius(30)
         })
-        
+        .accessibilityIdentifier(Identifiers.startGameButton)
     }
     
     @ViewBuilder
@@ -115,6 +137,7 @@ private extension BoardSizePickerView {
                         .tint(.gray)
                 }
             }
+            .accessibilityIdentifier(Identifiers.closeButton)
         }
     }
 }
@@ -122,6 +145,10 @@ private extension BoardSizePickerView {
 #Preview {
     ZStack {
         Color.gray
-        BoardSizePickerView(selectedNumber: 4, isCloseButtonAvailable: true)
+        BoardSizePickerView(
+            allowedBoardRange: 4...20,
+            selectedNumber: 4,
+            isCloseButtonAvailable: true
+        )
     }
 }

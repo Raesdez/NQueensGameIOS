@@ -9,10 +9,11 @@ import Observation
 import SwiftUI
 
 @Observable
+/// Instance of coordinator for navigation.
 /// - Note: Coordinator pattern based on: https://medium.com/@dikidwid0/mastering-navigation-in-swiftui-using-coordinator-pattern-833396c67db5
 final class NavigationCoordinator {
     /// Handles the navigation stack.
-    /// ``NavigationPath`` is a type eraser that allows us to navigate to different types of models (used since the first item in the list is the button to start a new match)
+    /// ``NavigationPath`` is a type eraser that allows us to navigate to different types of models
     var path = NavigationPath()
 
     // MARK: Flow control

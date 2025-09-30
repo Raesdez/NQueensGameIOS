@@ -4,13 +4,9 @@
 //
 //  Created by Ramón on 27/9/25.
 //
-import UIKit
 
+/// Represents a cell (or a position) in a chess board
 struct Coord: Hashable {
     let row: Int
     let col: Int
-    
-    var cgPoint: CGPoint {
-        CGPoint(x: row, y: col)
-    }
 }
