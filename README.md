@@ -1,6 +1,6 @@
 Sample iOS app consisting of a chess board game to solve the N-Queen Problem. The user selects the desired board size (n x n) and then has to place n amount of queen pieces so that no queen threatens another.
 
-
+Developed using SwiftUI
 
 --- 
 
