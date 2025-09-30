@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		F6B84C8C2E8B5803003A77CF /* RiveRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = F6B84C8B2E8B5803003A77CF /* RiveRuntime */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		F66EB5AB2E88585700C71BF9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -44,6 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6B84C8C2E8B5803003A77CF /* RiveRuntime in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +101,7 @@
 			);
 			name = NQueensGame;
 			packageProductDependencies = (
+				F6B84C8B2E8B5803003A77CF /* RiveRuntime */,
 			);
 			productName = NQueensGame;
 			productReference = F66EB59D2E88585500C71BF9 /* NQueensGame.app */;
@@ -152,6 +158,9 @@
 			);
 			mainGroup = F66EB5942E88585500C71BF9;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				F6B84C8A2E8B5803003A77CF /* XCRemoteSwiftPackageReference "rive-ios" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F66EB59E2E88585500C71BF9 /* Products */;
 			projectDirPath = "";
@@ -468,6 +477,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F6B84C8A2E8B5803003A77CF /* XCRemoteSwiftPackageReference "rive-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/rive-app/rive-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.11.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F6B84C8B2E8B5803003A77CF /* RiveRuntime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F6B84C8A2E8B5803003A77CF /* XCRemoteSwiftPackageReference "rive-ios" */;
+			productName = RiveRuntime;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F66EB5952E88585500C71BF9 /* Project object */;
 }

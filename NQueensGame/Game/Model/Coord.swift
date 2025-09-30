@@ -6,7 +6,7 @@
 //
 
 /// Represents a cell (or a position) in a chess board
-struct Coord: Hashable {
+struct Coord: nonisolated Hashable {
     let row: Int
     let col: Int
 }

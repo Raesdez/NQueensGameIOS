@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct GameView: View {
+    @Environment(NavigationCoordinator.self) private var coordinator
     @State private var viewModel: GameViewModel
     
     init() {
@@ -19,6 +20,7 @@ struct GameView: View {
             Gradient.backgroundGradient
             makeContentView()
             makeGameSettingsOverlayView()
+            makeGameWonView()
         }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
@@ -30,7 +32,6 @@ struct GameView: View {
                 }
                 .accessibilityIdentifier(Identifiers.restartButton)
             }
-        
         }
     }
 }
@@ -65,12 +66,6 @@ private extension GameView {
                     .accessibilityIdentifier(Identifiers.board)
                 makeRemainingQueensView()
                 Spacer()
-            }
-            .overlay {
-                if viewModel.gameWon {
-                    Text("Yay you won")
-                        .foregroundColor(.white)
-                }
             }
             .padding(.top, .md)
         } else {
@@ -111,6 +106,33 @@ private extension GameView {
         }
     }
     
+    @ViewBuilder
+    func makeGameWonView() -> some View {
+        if (viewModel.gameWon && !viewModel.showGameSettingsView) {
+            ZStack {
+                Color.gray
+                    .opacity(Constants.overlayBackgroundOpacity)
+                    .ignoresSafeArea()
+                    .transition(.opacity)
+                
+                GameWonView(
+                    startNewGameAction: {
+                        withAnimation(.easeInOut(duration: Constants.animationDuration)) {
+                            viewModel.restart()
+                        }
+                    },
+                    goHomeAction: {
+                        coordinator.popToRoot()
+                    }
+                )
+                .padding(.horizontal, .lg)
+                .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
+            .zIndex(1)
+            .animation(.easeInOut(duration: Constants.animationDuration), value: viewModel.showGameSettingsView)
+        }
+    }
+    
     func makeRemainingQueensView() -> some View {
         HStack {
             Text("Challenge. Place all required queens in the board so no piece threatens another")
@@ -140,5 +162,6 @@ private extension GameView {
 #Preview {
     NavigationStack {
         GameView()
+            .environment(NavigationCoordinator())
     }
 }
