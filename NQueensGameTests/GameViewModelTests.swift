@@ -29,7 +29,7 @@ struct GameViewModelTests {
         viewModel.start(boardSize: 4)
         viewModel.tapCell(at: coord)
         
-        #expect(viewModel.placedQueens.count == 0)
+        #expect(viewModel.placedPieces.count == 0)
     }
     
     @Test("Test reset active game")
@@ -39,7 +39,7 @@ struct GameViewModelTests {
         
         #expect(viewModel.boardSize == 4)
         #expect(!viewModel.showGameSettingsView)
-        #expect(viewModel.placedQueens.count == 1)
+        #expect(viewModel.placedPieces.count == 1)
         
         viewModel.restart()
         #expect(viewModel.showGameSettingsView)
@@ -47,7 +47,7 @@ struct GameViewModelTests {
         viewModel.start(boardSize: 10)
         #expect(viewModel.boardSize == 10)
         #expect(!viewModel.showGameSettingsView)
-        #expect(viewModel.placedQueens.isEmpty)
+        #expect(viewModel.placedPieces.isEmpty)
         
     }
     
@@ -68,6 +68,14 @@ struct GameViewModelTests {
         #expect(!viewModel.isSettingsCloseButtonEnabled)
         viewModel.start(boardSize: 4)
         #expect(viewModel.isSettingsCloseButtonEnabled)
+    }
+    
+    @Test("Refuse to perform tap cell action if its in error state")
+    func ignoreTapCellIfErrorState() {
+        viewModel.start(boardSize: -5)
+        #expect(viewModel.placedPieces.isEmpty)
+        viewModel.tapCell(at: Coord(row: 0, col: 0))
+        #expect(viewModel.placedPieces.isEmpty)
     }
 }
 
