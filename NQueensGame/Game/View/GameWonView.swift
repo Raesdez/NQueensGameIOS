@@ -22,7 +22,7 @@ struct GameWonView: View {
                 .padding(.bottom, .lg)
         }
         .padding()
-        .background(.white)
+        .background(Color.background)
         .cornerRadius(20)
         .shadow(radius: 11)
     }
@@ -44,7 +44,6 @@ private extension GameWonView {
             .onAppear {
                 riveViewModel.triggerInput("Click")
             }
-            .background(.white)
     }
     
     func makeStartAgainButton() -> some View {
@@ -55,7 +54,7 @@ private extension GameWonView {
                 .foregroundColor(Color.textOnBackground)
                 .textFont(.buttonStandard)
                 .padding()
-                .background(Color.green)
+                .background(Color.appPrimary)
                 .cornerRadius(30)
         })
         .accessibilityIdentifier(Identifiers.startAgainButton)

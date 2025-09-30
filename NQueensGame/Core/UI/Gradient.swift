@@ -11,8 +11,8 @@ struct Gradient {
     static var backgroundGradient: some View {
         LinearGradient(
             colors: [
-                Color.backgroundGradientStart,
-                Color.backgroundGradientEnd
+                Color.appSecondary,
+                Color.appPrimary
             ],
             startPoint: .topLeading,
             endPoint: .bottomTrailing

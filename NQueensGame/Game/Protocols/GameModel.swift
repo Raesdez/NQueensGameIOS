@@ -5,11 +5,9 @@
 //  Created by Ramón on 29/9/25.
 //
 
-import Observation
-
 /// Protocol that set the common interface for a Game.
 /// - Note: It allows to expand the game beyond Queen pieces.
-protocol GameModel: AnyObject, Observable {
+protocol GameModel {
     var boardSize: Int { get }
     /// Current pieces placed in board by the user, identified by their cell (coordinated)
     var placedPieces: Set<Coord> { get }

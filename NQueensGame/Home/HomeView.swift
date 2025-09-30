@@ -50,10 +50,10 @@ private extension HomeView {
             coordinator.push(.game)
         }, label: {
             Text("Start game")
-                .foregroundColor(.white)
+                .foregroundColor(Color.textOnBackground)
                 .textFont(.buttonBig, .medium)
                 .padding()
-                .background(Color.brown)
+                .background(Color.appPrimary)
                 .cornerRadius(30)
         })
         .accessibilityIdentifier(Identifiers.startButton)

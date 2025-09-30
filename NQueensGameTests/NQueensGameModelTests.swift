@@ -8,6 +8,7 @@
 import Testing
 @testable import NQueensGame
 
+@MainActor
 struct NQueensGameModelTests {
     private var gameModel = NQueensGameModel()
     

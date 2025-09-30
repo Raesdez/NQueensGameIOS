@@ -39,10 +39,12 @@ struct BoardSizePickerView: View {
     
             VStack(spacing: Spacing.md.rawValue) {
                 Text("Select the size of the board you wanna play")
+                    .foregroundColor(Color.textStandard)
                     .textFont(.title)
                     .multilineTextAlignment(.center)
                     .accessibilityIdentifier(Identifiers.title)
                 Text("Bigger boards are more difficult")
+                    .foregroundColor(Color.textStandard)
                     .textFont(.subtitle, .medium)
                     .accessibilityIdentifier(Identifiers.subtitle)
             }
@@ -55,7 +57,7 @@ struct BoardSizePickerView: View {
             makeStartButton()
                 .padding(.vertical, .md)
         }
-        .background(.white)
+        .background(Color.background)
         .cornerRadius(20)
         .shadow(radius: 11)
     }
@@ -84,12 +86,13 @@ private extension BoardSizePickerView {
                 Image(systemName: "minus.square.fill")
                     .resizable()
                     .frame(width: 35, height: 37)
-                    .tint(.green)
+                    .tint(Color.textStandard)
             }
             .disabled(selectedNumber == range.lowerBound)
             .accessibilityIdentifier(Identifiers.minusButton)
             
             Text("\(selectedNumber)")
+                .foregroundColor(Color.textStandard)
                 .textFont(.heading)
                 .padding(.horizontal, .lg)
                 .accessibilityIdentifier(Identifiers.currentSelectedNumber)
@@ -102,7 +105,7 @@ private extension BoardSizePickerView {
                 Image(systemName: "plus.square.fill")
                     .resizable()
                     .frame(width: 35, height: 37)
-                    .tint(.green)
+                    .tint(Color.textStandard)
             }
             .disabled(selectedNumber == range.upperBound)
             .accessibilityIdentifier(Identifiers.plusButton)
@@ -114,10 +117,10 @@ private extension BoardSizePickerView {
             startGameButtonTappedAction?(selectedNumber)
         }, label: {
             Text("Start game")
-                .foregroundColor(.white)
+                .foregroundColor(Color.textOnBackground)
                 .textFont(.buttonStandard)
                 .padding()
-                .background(Color.green)
+                .background(Color.appPrimary)
                 .cornerRadius(30)
         })
         .accessibilityIdentifier(Identifiers.startGameButton)

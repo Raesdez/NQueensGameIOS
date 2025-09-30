@@ -8,6 +8,7 @@
 import Testing
 @testable import NQueensGame
 
+@MainActor
 struct GameViewModelTests {
     let viewModel = GameViewModel()
     

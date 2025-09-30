@@ -147,13 +147,14 @@ private extension GameView {
                     .accessibilityIdentifier(Identifiers.remainingPiecesTitle)
                 Text("\(viewModel.remainingPieces)")
                     .textFont(.heading, .bold)
+                    .foregroundColor(Color.textStandard)
                     .accessibilityIdentifier(Identifiers.remainingPiecesNumber)
             }
             .padding()
         }
         .background(
             RoundedRectangle(cornerRadius: 20)
-                .fill(Color.white)
+                .fill(Color.background)
         )
         .padding(.all,.sm)
     }
