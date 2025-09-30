@@ -26,6 +26,7 @@ extension GameBoardView {
 private extension GameBoardView {
     struct Constants {
         static var pieceScaleFactor: Double { 0.45 }
+        static var animationDuration: Double { 0.15 }
     }
     
     @ViewBuilder
@@ -97,13 +98,16 @@ private extension GameBoardView {
                     )
                     .frame(width: cellSize * Constants.pieceScaleFactor, height: cellSize * Constants.pieceScaleFactor)
                     .accessibilityIdentifier(Identifiers.piece)
+                    .animation(.easeInOut(duration: Constants.animationDuration), value: viewModel.placedPieces.contains(coord) )
             }
         }
         .onTapGesture {
             let generator = UIImpactFeedbackGenerator(style: .light)
             generator.impactOccurred()
             
-            viewModel.tapCell(at: coord)
+            withAnimation(.easeInOut(duration: Constants.animationDuration)) {
+                viewModel.tapCell(at: coord)
+            }
         }
     }
 }
