@@ -3,7 +3,5 @@ Sample iOS app consisting of a chess board game to solve the N-Queen Problem. Th
 
 
 --- 
-
-Trophy animation provided by HarrisonSimmonds in https://rive.app/marketplace/8331-15961-trophy-demonstration/ under [CC BY](https://creativecommons.org/licenses/by/4.0/) license. Modifications was done to remove the background.
-
+Trophy animation provided by HarrisonSimmonds in https://rive.app/marketplace/8331-15961-trophy-demonstration/ under [CC BY](https://creativecommons.org/licenses/by/4.0/) license. A modification was done to add a transparent background.
 -----
