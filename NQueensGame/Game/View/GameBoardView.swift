@@ -100,6 +100,9 @@ private extension GameBoardView {
             }
         }
         .onTapGesture {
+            let generator = UIImpactFeedbackGenerator(style: .light)
+            generator.impactOccurred()
+            
             viewModel.tapCell(at: coord)
         }
     }

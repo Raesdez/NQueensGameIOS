@@ -33,6 +33,15 @@ struct GameView: View {
                 .accessibilityIdentifier(Identifiers.restartButton)
             }
         }
+        .onChange(of: viewModel.conflicts) { old, new in
+            // If conflicts set grew, trigger an error haptic feedback
+            guard new.count > old.count else {
+                return
+            }
+              
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(.error)
+          }
     }
 }
 
